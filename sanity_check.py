@@ -38,10 +38,10 @@ def load_features_csv(csv_path):
         reader = csv.reader(csv_file)
         next(reader)
         for row in reader:
-            name, feature_str = row
-            feature = np.fromstring(feature_str[1:-1], sep=' ')
+            name = row[0]
+            feature = np.array([list(map(float, row[1].split(',')))])
             names.append(name)
-            features.append(feature)
+            features.append(feature.reshape(1, -1))
 
     return names, np.array(features)
 
@@ -49,29 +49,12 @@ if __name__ == '__main__':
     start_time = time.time()
     model = load_pretrained_model('ir_101')
     feature, norm = model(torch.randn(2,3,112,112))
-    # path = "/media/jeff/Seagate/adaface/faces_4k/a.j. achter_1.png"
-    # path = "/media/jeff/Seagate/Downloads/all_cards/rutchsman.jpg"
-    # path = "/media/jeff/Seagate/Downloads/all_cards/noren.jpg"
-    # path = "/media/jeff/Seagate/Downloads/all_cards/blylven.jpg"
-    path = "/media/jeff/Seagate/Downloads/all_cards/abadie_hard.png"
-    # path = "/media/jeff/Seagate/Downloads/all_cards/ichiro.jpg"
-    status, aligned_rgb_img = align.get_aligned_face(path)
-    if status != 0:
-        print("no face detected!")
-        exit()
-    cv2.imshow("test", cv2.cvtColor(np.array(aligned_rgb_img), cv2.COLOR_RGB2BGR))
-    cv2.waitKey(0)
-    bgr_tensor_input = to_input(aligned_rgb_img)
-    feature, _ = model(bgr_tensor_input)
-    print(f"load time: {time.time()-start_time}")
     
-    start_time = time.time()
     names, features = load_features_csv("output/features.csv")
-    similarities = cosine_similarity(feature.detach().numpy().reshape(1, -1), features)
-    scores = (similarities + 1) / 2
-    most_similar_indices = scores.argsort()[0][-5:][::-1]  # Get the top 5 indices in descending order
-    print(f"search time: {time.time()-start_time}")
-    print("Indices of the top 5 most similar features:")
-    print(most_similar_indices)
-    for i in most_similar_indices:
-        print(f"{i}: {names[i]} ({scores[0][i]})")
+    print(f"going for {len(features)} iterations")
+    for i in range(1, len(features)):
+        sim_1 = cosine_similarity(features[i], features[i])
+        sim_diff = cosine_similarity(features[i], features[i-1])
+        print(f"compairons between features of {names[i]} and {names[i-1]}")
+        print(sim_1)
+        print(sim_diff)

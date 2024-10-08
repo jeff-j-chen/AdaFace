@@ -10,3 +10,6 @@ validation_ijbs
 result
 scripts/run_debug*
 ada
+*.png
+*.jpg
+
