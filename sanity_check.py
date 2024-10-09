@@ -50,7 +50,7 @@ if __name__ == '__main__':
     model = load_pretrained_model('ir_101')
     feature, norm = model(torch.randn(2,3,112,112))
     
-    names, features = load_features_csv("output/features.csv")
+    names, features = load_features_csv("output/features_10only.csv")
     print(f"going for {len(features)} iterations")
     for i in range(1, len(features)):
         sim_1 = cosine_similarity(features[i], features[i])

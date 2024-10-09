@@ -2,7 +2,7 @@ import os
 from tqdm import tqdm
 with open("names.txt", "r") as f:
     names = f.readlines()
-files = os.listdir('faces')
+files = os.listdir('faces_google')
 missing_names = []
 for i in tqdm(range(len(names))):
     name = names[i]

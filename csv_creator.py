@@ -9,32 +9,6 @@ from tqdm import tqdm
 import cv2
 from sklearn.metrics.pairwise import cosine_similarity
 
-# def _find_majority_face(similarities, threshold=0.2):
-#     mean_similarities = np.mean(similarities, axis=1)
-#     majority_index = np.argmax(mean_similarities)
-#     majority_face = similarities[majority_index]
-#     for i, similarity in enumerate(majority_face):
-#         if i != majority_index and similarity < threshold:
-#             return None
-#     return majority_index
-
-# def _filter_faces(face_features, majority_index, similarities, threshold=0.6):
-#     similar_faces = []
-#     for i, feature in enumerate(face_features):
-#         if i != majority_index and similarities[majority_index][i] >= threshold:
-#             similar_faces.append(i)
-#     return similar_faces
-
-# def get_similar_faces(features):
-#     similarities = _calculate_cosine_similarity(features)
-#     majority_index = _find_majority_face(similarities)
-#     if majority_index is not None:
-#         similar_faces = _filter_faces(features, majority_index, similarities)
-#         return [majority_index, *similar_faces]
-#     else:
-#         return []
-
-
 adaface_models = {
     'ir_101':"pretrained/adaface_ir101_webface4m.ckpt",
 }
@@ -56,9 +30,12 @@ def to_input(pil_rgb_image):
     return tensor
 
 def process_feature(fname):
-    print(f"processing for {fname}")
     path = os.path.join(test_image_path, fname)
-    status, aligned_rgb_img = align.get_aligned_face(path)
+    try:
+        status, aligned_rgb_img = align.get_aligned_face(path)
+    except:
+        failed_reads.append(fname + " (bad image)")
+        return 1
     if status == 0:
         bgr_tensor_input = to_input(aligned_rgb_img)
         f, _ = model(bgr_tensor_input)
@@ -70,23 +47,24 @@ def process_feature(fname):
             writer.writerow([name, feature_string])
         return 0
     else:
-        failed_reads.append(fname)
+        failed_reads.append(fname + "(missing face)")
         return 1
 
 if __name__ == '__main__':
     model = load_pretrained_model('ir_101')
     feature, norm = model(torch.randn(2,3,112,112))
 
-    test_image_path = '/media/jeff/Seagate/adaface/faces_10only'
+    test_image_path = '/media/jeff/Seagate/adaface/faces'
     prev_name = ""
     to_process = []
     missing_names = []
     failed_reads = []
     with open("names.txt", "r") as f:
         names = f.readlines()
-    for i in tqdm(range(10)):
+    for i in (pbar := tqdm(range(len(names)))):
         name = '_'.join(names[i].strip().split(' '))
         pot_missing = False
+        pbar.set_description(f"processing for {name.strip()}")
         for i in range(1, 4):
             fname_png = f"{name}_{i}.png"
             fname_jpg = f"{name}_{i}.jpg"
@@ -96,7 +74,6 @@ if __name__ == '__main__':
             elif os.path.isfile(os.path.join(test_image_path, fname_jpg)):
                 res = process_feature(fname_jpg)
             else:
-                print(f"checked {os.path.join(test_image_path, fname_png)} which did not exist, marking as missing")
                 if i == 1 or pot_missing:
                     missing_names.append(name)
                 break

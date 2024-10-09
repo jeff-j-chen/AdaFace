@@ -1,4 +1,4 @@
-from icrawler.builtin import BingImageCrawler
+from icrawler.builtin import BingImageCrawler, BaiduImageCrawler, GoogleImageCrawler
 from icrawler import ImageDownloader
 from icrawler import Parser
 from tqdm import tqdm
@@ -6,6 +6,8 @@ from urllib.parse import urlparse
 import uuid
 import logging
 import time
+from bs4 import BeautifulSoup
+import re
 
 
 with open("names.txt", "r") as f:
@@ -26,26 +28,37 @@ class MyImageDownloader(ImageDownloader):
             return "PLACEHOLDER.png"
         return f"{cur_name}_{file_idx}.{extension}"
     
+class MyParser(Parser):
+    def parse(self, response):
+        soup = BeautifulSoup(response.content.decode("utf-8", "ignore"), "lxml")
+        image_divs = soup.find_all(name="script")
+        for div in image_divs:
+            txt = str(div)
 
-bing_crawler = BingImageCrawler(
+            uris = re.findall(r"http[^\[]*?.(?:jpg|png|bmp)", txt)
+            if not uris:
+                uris = re.findall(r"http[^\[]*?\.(?:jpg|png|bmp)", txt)
+            uris = [bytes(uri, "utf-8").decode("unicode-escape") for uri in uris]
+            if uris:
+                return [{"file_url": uri} for uri in uris]
+    
+
+bing_crawler = GoogleImageCrawler(
     downloader_cls=MyImageDownloader,
-    storage = {'root_dir': r'faces'}
+    parser_cls=MyParser
+    storage = {'root_dir': r'faces_google'}
 )
 
-prog = tqdm(range(18508, len(names)))
+prog = tqdm(range(45, len(names)))
 # prog = tqdm([i for i in range(10)])
 for i in prog:
     # if i > 0: break
     name = names[i].strip()
     prog.set_description(f"tqdm: {name}")
-    time.sleep(0.5)
+    time.sleep(0.25)
     with open('current_player.txt', "w") as f:
         f.write(name)
     print(f"\nwrote: {name}")
     query = f'{name.strip()} baseball player'
-    bing_crawler.crawl(keyword=query, max_num=15)
-    time.sleep(0.5)
-
-
-
-    # CHECK FOR JPG VS PNG AND DO THAT SHIT
+    bing_crawler.crawl(keyword=query, max_num=3)
+    time.sleep(0.25)

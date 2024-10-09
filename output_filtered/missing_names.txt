@@ -549,6 +549,7 @@ harry_billiard
 dick_billings
 brent_billingsley
 jimmy_binder
+bingo_bingham
 george_binks
 charlie_biot
 doug_bird
@@ -638,6 +639,7 @@ bill_bolden
 frank_bolick
 bobby_bolin
 don_bollweg
+cecil_bolton
 cliff_bolton
 rod_bolton
 tom_bolton
@@ -781,6 +783,7 @@ mckinley_brewer
 mike_brewer
 tom_brewer
 jamie_brewington
+fritz_brickell
 ralph_brickner
 jim_brideweser
 otto_briggs
@@ -866,6 +869,7 @@ clarence_bruce
 lloyd_bruce
 earle_brucker
 earle_brucker
+j.t._bruett
 frank_bruggy
 mike_bruhert
 jacob_brumfield
@@ -986,6 +990,7 @@ frank_butler
 frank_butler
 rob_butler
 frank_buttery
+tommy_butts
 ralph_buxton
 john_buzhardt
 subby_byas
@@ -1376,6 +1381,7 @@ ralph_coles
 billy_colgan
 alvin_colina
 hap_collard
+willie_collazo
 lou_collier
 bob_collins
 dave_collins
@@ -1406,6 +1412,7 @@ keith_comstock
 onix_concepcion
 clay_condrey
 david_cone
+bunk_congalton
 dick_conger
 allen_conkwright
 jocko_conlan
@@ -1656,6 +1663,7 @@ bud_daley
 pete_daley
 dom_dallessandro
 brian_dallimore
+abner_dalrymple
 bill_dalrymple
 mike_dalton
 sun_daly
@@ -1820,6 +1828,7 @@ bob_dernier
 claud_derrick
 paul_derringer
 joe_desa
+gene_desautels
 jimmie_deshong
 john_desilva
 rube_dessau
@@ -2083,6 +2092,7 @@ hank_edwards
 johnny_edwards
 wayne_edwards
 weedy_edwards
+wish_egan
 cody_ege
 mack_eggleston
 howard_ehmke
@@ -2267,6 +2277,7 @@ junior_felix
 bob_feller
 jack_feller
 happy_felsch
+frank_fennelly
 horace_fenner
 stan_ferens
 joe_ferguson
@@ -2460,6 +2471,7 @@ alejandro_freire
 bill_french
 charlie_french
 pat_french
+walt_french
 frank_freund
 benny_frey
 steve_frey
@@ -2486,6 +2498,7 @@ john_fulgham
 dot_fulghum
 jimmy_fuller
 john_fuller
+shorty_fuller
 vern_fuller
 curt_fullerton
 brad_fullmer
@@ -2508,6 +2521,7 @@ brent_gaff
 eric_gagne
 ed_gagnier
 eddie_gaillard
+jay_gainer
 joe_gaines
 ty_gainey
 fred_gaiser
@@ -2545,6 +2559,7 @@ babe_ganzel
 john_ganzel
 mike_garbark
 gene_garber
+alex_garbowski
 chano_garcia
 damaso_garcia
 danny_garcia
@@ -2636,6 +2651,7 @@ doc_gessler
 byron_gettis
 jake_gettman
 gus_getz
+pretzels_getzien
 rube_geyer
 chappie_geygan
 patsy_gharrity
@@ -2848,6 +2864,7 @@ honey_green
 julius_green
 lenny_green
 scarborough_green
+shawn_green
 hank_greenberg
 al_greene
 charlie_greene
@@ -2875,6 +2892,7 @@ ivy_griffin
 tom_griffin
 clark_griffith
 derrell_griffith
+ted_griffith
 jeremy_griffiths
 acie_griggs
 guido_grilli
@@ -2941,6 +2959,7 @@ freddy_guzman
 joel_guzman
 johnny_guzman
 juan_guzman
+marcus_gwyn
 tony_gwynn
 tony_gwynn
 dick_gyselman
@@ -2977,6 +2996,7 @@ ray_hale
 red_hale
 sammy_hale
 albert_hall
+bert_hall
 bob_hall
 bob_hall
 jim_hall
@@ -3136,6 +3156,7 @@ ryan_hawblitzel
 ed_hawk
 bill_hawke
 andy_hawkins
+lemuel_hawkins
 robert_hawkins
 howie_haworth
 ben_hayes
@@ -3229,6 +3250,7 @@ john_henry
 john_henry
 preacher_henry
 phil_hensiek
+chuck_hensley
 matt_hensley
 drew_henson
 felix_heredia
@@ -3249,6 +3271,7 @@ leo_hernandez
 manny_hernandez
 orlando_hernandez
 runelvys_hernandez
+toby_hernandez
 xavier_hernandez
 junior_herndon
 tom_hernon
@@ -3553,6 +3576,7 @@ charlie_ingraham
 garey_ingram
 bert_inks
 jeff_innis
+happy_iott
 hideki_irabu
 tim_ireland
 orlando_isales
@@ -3912,6 +3936,7 @@ gene_kingsale
 mike_kinkade
 billy_kinloch
 dennis_kinney
+walt_kinney
 bob_kinsella
 william_kinsler
 harry_kinzy
@@ -4223,6 +4248,7 @@ bill_lennon
 ed_lennon
 pat_lennon
 ed_lennox
+jim_lentine
 eddie_leon
 izzy_leon
 buck_leonard
@@ -4246,6 +4272,7 @@ don_leshnock
 curt_leskanic
 brad_lesley
 sam_leslie
+charlie_letchas
 jesse_levan
 walt_leverenz
 jim_levey
@@ -4417,6 +4444,7 @@ noah_lowry
 mike_loynd
 willie_lozado
 steve_lubratich
+hal_luby
 pat_luby
 fred_lucas
 ray_lucas
@@ -4536,6 +4564,7 @@ gary_majewski
 val_majewski
 william_makell
 dave_malarcher
+bill_malarkey
 mark_malaska
 candy_maldonado
 tony_malinosky
@@ -4595,6 +4624,7 @@ juan_marichal
 roger_maris
 mike_marjama
 nick_markakis
+duke_markell
 johnny_markham
 cliff_markle
 dick_marlowe
@@ -4907,6 +4937,7 @@ dave_mcnally
 jim_mcnamara
 gordon_mcnaughton
 harry_mcneal
+red_mcneal
 willie_mcneely
 jerry_mcnertney
 frank_mcpartlin
@@ -4982,6 +5013,7 @@ herm_merritt
 jim_merritt
 lloyd_merritt
 jack_merson
+sam_mertes
 matt_merullo
 steve_mesner
 bobby_messenger
@@ -5150,6 +5182,7 @@ guillermo_molina
 izzy_molina
 fred_mollenkamp
 fritz_mollwitz
+blas_monaco
 shane_monahan
 bill_monbouquette
 raul_mondesi
@@ -5419,6 +5452,7 @@ graig_nettles
 jim_nettles
 morris_nettles
 milo_netzel
+otto_neu
 john_neuer
 nick_neugebauer
 johnny_neun
@@ -5561,6 +5595,7 @@ jose_offerman
 rowland_office
 mose_offutt
 chad_ogea
+jim_oglesby
 ben_oglivie
 joe_ogrodowski
 kirt_ojala
@@ -5652,6 +5687,7 @@ roosevelt_owens
 sylvester_owens
 will_owens
 yip_owens
+rick_ownbey
 henry_oxley
 pablo_ozuna
 brother_pace
@@ -5911,6 +5947,7 @@ carmen_pignatiello
 israel_pike
 lip_pike
 duane_pillette
+herman_pillette
 squiz_pillion
 andy_pilney
 babe_pinelli
@@ -6139,6 +6176,7 @@ vic_raschi
 eric_rasmussen
 darrell_rasner
 morrie_rath
+gene_ratliff
 jon_ratliff
 steve_ratzer
 doug_rau
@@ -6260,6 +6298,7 @@ duane_richards
 paul_richards
 rusty_richards
 bill_richardson
+danny_richardson
 gene_richardson
 henry_richardson
 kevin_richardson
@@ -6281,6 +6320,7 @@ jack_ridley
 john_riedling
 brad_rigby
 paul_rigdon
+jerrod_riggan
 shawn_riggans
 adam_riggs
 lew_riggs
@@ -6718,10 +6758,12 @@ gus_triandos
 bob_trice
 manny_trillo
 coaker_triplett
+rich_troedson
 mike_trombley
 bill_trotter
 steve_trout
 bob_troy
+dasher_troy
 donald_troy
 fred_truax
 chris_truby
@@ -6926,6 +6968,7 @@ stan_wall
 bo_wallace
 derek_wallace
 don_wallace
+huck_wallace
 jeff_wallace
 lefty_wallace
 red_waller
@@ -7032,6 +7075,7 @@ bill_weir
 walt_weiss
 johnny_welaj
 bob_welch
+curt_welch
 frank_welch
 herb_welch
 johnny_welch
@@ -7067,6 +7111,7 @@ wes_westrum
 jeff_wetherby
 dutch_wetzel
 stefan_wever
+gus_weyhing
 john_weyhing
 bert_whaling
 david_whatley
@@ -7279,6 +7324,7 @@ gary_woods
 jake_woods
 jim_woods
 parnell_woods
+pinky_woods
 walt_woods
 dick_woodson
 tracy_woodson
