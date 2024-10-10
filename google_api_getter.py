@@ -8,7 +8,10 @@ import logging
 import time
 from bs4 import BeautifulSoup
 import re
-
+from icrawler.utils import ProxyPool, Proxy
+import sys
+import random
+user_agents = ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.2420.81", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", "Mozilla/5.0 (Macintosh; Intel Mac OS X 14.4; rv:124.0) Gecko/20100101 Firefox/124.0", "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15", "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_4_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", "Mozilla/5.0 (X11; Linux i686; rv:124.0) Gecko/20100101 Firefox/124.0"]
 
 with open("names.txt", "r") as f:
     names = f.readlines()
@@ -39,26 +42,35 @@ class MyParser(Parser):
             if not uris:
                 uris = re.findall(r"http[^\[]*?\.(?:jpg|png|bmp)", txt)
             uris = [bytes(uri, "utf-8").decode("unicode-escape") for uri in uris]
-            if uris:
+            if uris is not None:
                 return [{"file_url": uri} for uri in uris]
+            else:
+                print("got none back")
+                sys.exit()
     
 
-bing_crawler = GoogleImageCrawler(
+class MyCrawler(GoogleImageCrawler):
+
+    def set_proxy_pool(self, pool=None):
+        self.proxy_pool = ProxyPool()
+        self.proxy_pool.add_proxy(Proxy("brd-customer-hl_3d243eb6-zone-residential_proxy1:mo3kz3k66e8s@brd.superproxy.io:22225", "http"))
+
+my_crawler = MyCrawler(
     downloader_cls=MyImageDownloader,
-    parser_cls=MyParser
+    # parser_cls=MyParser,
     storage = {'root_dir': r'faces_google'}
 )
 
-prog = tqdm(range(45, len(names)))
-# prog = tqdm([i for i in range(10)])
+prog = tqdm(range(14565, len(names)))
 for i in prog:
-    # if i > 0: break
     name = names[i].strip()
+    if i % 50 == 0:
+        MyCrawler.set_session(my_crawler, {"User-Agent": (random.choice(user_agents))})
     prog.set_description(f"tqdm: {name}")
     time.sleep(0.25)
     with open('current_player.txt', "w") as f:
         f.write(name)
     print(f"\nwrote: {name}")
     query = f'{name.strip()} baseball player'
-    bing_crawler.crawl(keyword=query, max_num=3)
+    my_crawler.crawl(keyword=query, max_num=2)
     time.sleep(0.25)

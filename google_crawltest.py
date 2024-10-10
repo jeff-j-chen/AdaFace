@@ -1,9 +1,22 @@
-from icrawler.builtin import BaiduImageCrawler, BingImageCrawler, GoogleImageCrawler
+#This will not run on online IDE
+import requests
+from bs4 import BeautifulSoup
 
-google_crawler = GoogleImageCrawler(
-    feeder_threads=1,
-    parser_threads=1,
-    downloader_threads=4,
-    storage={'root_dir': 'your_image_dir'})
-google_crawler.crawl(keyword='cat', offset=0, max_num=10,
-                     min_size=(200,200), max_size=None, file_idx_offset=0)
+# URL = "https://www.google.com/search?q=david+aardsma";
+# r = requests.get(URL)
+
+# soup = BeautifulSoup(r.content, 'html5lib') # If this line causes an error, run 'pip install html5lib' or install html5lib
+# print(soup.prettify())
+response = requests.get("http://free-proxy-list.net")
+soup = BeautifulSoup(response.content, "lxml")
+table = soup.find("table", id="proxylisttable")
+for tr in table.tbody.find_all("tr"):
+    info = tr.find_all("td")
+    if info[4].string != "elite proxy":
+        continue
+    if info[6].string == "yes":
+        protocol = "https"
+    else:
+        protocol = "http"
+    addr = f"{info[0].string}:{info[1].string}"
+    print({"addr": addr, "protocol": protocol})
