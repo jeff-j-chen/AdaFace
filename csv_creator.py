@@ -75,19 +75,12 @@ def main():
     with ThreadPoolExecutor(max_workers=16) as executor:
         print("loading faces..")
         for i in tqdm(range(len(names))):
+            if i < 20556: continue
             name = '_'.join(names[i].strip().split(' '))
-            for i in range(1, 3):
-                fname_png = f"{name}_{i}.png"
-                fname_jpg = f"{name}_{i}.jpg"
-                
-                file_choice = ""
-                if os.path.isfile(os.path.join(test_image_path, fname_png)):
-                    file_choice = fname_png
-                elif os.path.isfile(os.path.join(test_image_path, fname_jpg)):
-                    file_choice = fname_jpg
+            for i in range(1, 4):                
                 tasks.append(
                     executor.submit(
-                            process_feature, file_choice, model, device, test_image_path
+                            process_feature, f"{name}_{i}.jpg", model, device, test_image_path
                         )
                     )
         
