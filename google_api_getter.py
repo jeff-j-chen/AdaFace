@@ -12,13 +12,12 @@ my_crawler = MyImageCrawler(
     storage = {'root_dir': r'faces_google'}
 )
 name = ""
-prog = tqdm(range(len(names)))
+prog = tqdm(range(9952, len(names)))
 for i in prog:
     name = names[i].strip()
     if i % 50 == 0:
         MyImageCrawler.set_session(my_crawler, {"User-Agent": (random.choice(user_agents))})
     prog.set_description(f"tqdm: {name}")
-    time.sleep(0.5)
-    query = f'{name.strip()} baseball player'
-    my_crawler.crawl(keyword=query, person_name=name.strip().replace(" ", "_"), max_num=3)
-    time.sleep(0.5)
+    query = f'{name.strip()} baseball player card'
+    my_crawler.crawl(keyword=query, person_name=name.strip().replace(" ", "_"), global_index=i+1, max_num=3)
+    time.sleep(0.66)

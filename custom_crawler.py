@@ -4,7 +4,8 @@ from io import BytesIO
 from PIL import Image
 from urllib.parse import urlparse
 from icrawler.utils import ProxyPool, Proxy
-            
+
+
 class MyImageDownloader(ImageDownloader):
 
     def download(self, task, default_ext, timeout=5, max_retry=3, overwrite=False, **kwargs):
@@ -19,13 +20,15 @@ class MyImageDownloader(ImageDownloader):
         file_url = task["file_url"]
         task["success"] = False
         task["filename"] = None
-        task["person_name"] = kwargs["person_name"]
         retry = max_retry
 
         if not overwrite:
             with self.lock:
-                self.fetched_num += 1
+                task["person_name"] = kwargs["person_name"]
+                task["global_index"] = kwargs["global_index"]
                 filename = self.get_filename(task, default_ext)
+                task["filename"] = filename
+                self.fetched_num += 1
                 if self.storage.exists(filename):
                     self.logger.info("skip downloading file %s", filename)
                     return
@@ -52,11 +55,9 @@ class MyImageDownloader(ImageDownloader):
                     break
                 with self.lock:
                     self.fetched_num += 1
-                    filename = self.get_filename(task, default_ext)
                 self.logger.info("image #%s\t%s", self.fetched_num, file_url)
-                self.storage.write(filename, response.content)
+                self.storage.write(task["filename"], response.content)
                 task["success"] = True
-                task["filename"] = filename
                 break
             finally:
                 retry -= 1
@@ -65,7 +66,7 @@ class MyImageDownloader(ImageDownloader):
         url_path = urlparse(task['file_url'])[2]
         extension = url_path.split('.')[-1] if '.' in url_path else default_ext
         file_idx = self.fetched_num + self.file_idx_offset
-        return f"{task['person_name']}_{file_idx}.jpg"
+        return f"{task['global_index']}_{task['person_name']}_{file_idx}.jpg"
     
     def keep_file(self, task, response, min_size=None, max_size=None, **kwargs):
         """Decide whether to keep the image
@@ -89,6 +90,7 @@ class MyImageDownloader(ImageDownloader):
         if max_size and not self._size_lt(img.size, max_size):
             return False
         return True
+    
 
 class MyImageCrawler(Crawler):
     def __init__(
@@ -104,6 +106,7 @@ class MyImageCrawler(Crawler):
         self,
         keyword,
         person_name,
+        global_index,
         filters=None,
         offset=0,
         max_num=1000,
@@ -131,7 +134,6 @@ class MyImageCrawler(Crawler):
 
         feeder_kwargs = dict(keyword=keyword, offset=offset, max_num=max_num, language=language, filters=filters)
         downloader_kwargs = dict(
-            max_num=max_num, min_size=min_size, max_size=max_size, file_idx_offset=file_idx_offset, overwrite=overwrite, person_name=person_name
+            max_num=max_num, min_size=min_size, max_size=max_size, file_idx_offset=file_idx_offset, overwrite=overwrite, person_name=person_name, global_index=global_index
         )
         super().crawl(feeder_kwargs=feeder_kwargs, downloader_kwargs=downloader_kwargs)
-
